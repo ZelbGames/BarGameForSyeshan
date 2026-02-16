@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b6d46k2f2a40i"]
+
+[ext_resource type="PackedScene" uid="uid://dutbp8do1pbyt" path="res://bartender/psx_maiden.glb" id="1_q2xje"]
+
+[node name="Sketchfab_Scene" unique_id=1527975646 instance=ExtResource("1_q2xje")]
+
+[node name="����������������_001" parent="Sketchfab_model/574b298e78a340748515243164e6d99e_fbx/Object_2/RootNode" parent_id_path=PackedInt32Array(647320302) index="0" unique_id=545649462]
+transform = Transform3D(9.204732e-05, -1219.2035, -5.3293083e-05, 0, -5.329308e-05, 1219.2036, -1219.2036, -9.20473e-05, -4.023516e-12, -79385.58, 26328.59, 25180.348)
+
+[node name="Skeleton3D" parent="Sketchfab_model/574b298e78a340748515243164e6d99e_fbx/Object_2/RootNode/����������������_001/Object_5" parent_id_path=PackedInt32Array(1738566756) index="0" unique_id=980246897]
+bones/1/position = Vector3(-1.3330889e-06, -3.813331e-06, 1.9037616e-06)
+bones/1/rotation = Quaternion(0.68387806, 0.022361683, -0.020978954, 0.72895175)
+bones/2/rotation = Quaternion(0.048520297, -0.00035696477, 0.023440361, 0.99854714)
+bones/3/position = Vector3(2.4782665e-10, 0.9465686, 1.5478243e-05)
+bones/3/rotation = Quaternion(0.004416176, -0.0074622966, -0.19718628, 0.9803277)
+bones/4/position = Vector3(4.7630874e-06, 1.3165954, -3.213901e-05)
+bones/4/rotation = Quaternion(0.77422297, -0.0005211533, 0.0007006203, 0.63291246)
+bones/5/rotation = Quaternion(0.53049994, 0.331436, -0.3783635, 0.6823204)
+bones/6/rotation = Quaternion(0.9051273, 0.33910888, -0.062436312, 0.24870005)
+bones/7/rotation = Quaternion(-0.012812061, -0.4349783, 0.035800572, 0.89963776)
+bones/10/position = Vector3(4.822692e-06, 1.3165954, -3.2080337e-05)
+bones/10/rotation = Quaternion(-0.79351383, 0.0012504195, 0.0015205551, 0.6085492)
+bones/11/position = Vector3(1.2621749e-06, 1.0261204, 2.5331974e-06)
+bones/11/rotation = Quaternion(-0.3513885, -0.06394584, -0.5529698, 0.75276923)
+bones/12/rotation = Quaternion(-0.7245471, -0.3513232, -0.5801992, 0.12236268)
+bones/13/rotation = Quaternion(0.05592771, 0.6872176, 0.02722478, 0.72378373)
+bones/16/position = Vector3(4.8822967e-06, 1.3165954, -3.2107346e-05)
+bones/17/rotation = Quaternion(0.02174816, 8.032495e-05, -0.06781945, 0.9974606)
+bones/19/position = Vector3(1.6810081e-06, 0.9628933, 1.8439256e-05)
+bones/22/position = Vector3(1.7107959e-06, 0.96289355, 1.8455088e-05)
+bones/25/position = Vector3(-1.4500004e-06, -3.8133282e-06, 1.9073454e-06)
+bones/26/position = Vector3(-1.5175511e-06, 0.744964, -8.330525e-07)
+bones/26/rotation = Quaternion(-0.59151167, 0.008507425, 0.0062296586, 0.80622745)
+bones/27/rotation = Quaternion(-0.016861377, 0.0018506178, -0.05740772, 0.99820673)
+bones/28/rotation = Quaternion(-0.053384855, -0.10080865, 0.6306136, 0.76766807)
+bones/31/position = Vector3(-1.4500006e-06, -3.813331e-06, 1.9073474e-06)
+bones/32/position = Vector3(-1.3248924e-06, 0.6343624, 4.934634e-06)
+bones/32/rotation = Quaternion(-0.58244693, -0.0058376635, -0.0066477647, 0.8128206)
+bones/33/rotation = Quaternion(-0.025456982, -1.3393701e-05, 0.05489823, 0.99816746)
+bones/34/position = Vector3(3.241119e-06, 2.754232, 1.9063242e-05)
+bones/34/rotation = Quaternion(-0.036171634, 0.07735311, -0.6564974, 0.74947935)
+
+[node name="AnimationPlayer" parent="." index="1" unique_id=1726913825]
+autoplay = &"����������������_001|����������������_002|����������������_002|maiden cry"

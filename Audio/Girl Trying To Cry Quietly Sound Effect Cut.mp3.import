@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bs56bup4gu32"
+path="res://.godot/imported/Girl Trying To Cry Quietly Sound Effect Cut.mp3-c6a36bb31a5f5e25d6d3006c78cd3775.mp3str"
+
+[deps]
+
+source_file="res://Audio/Girl Trying To Cry Quietly Sound Effect Cut.mp3"
+dest_files=["res://.godot/imported/Girl Trying To Cry Quietly Sound Effect Cut.mp3-c6a36bb31a5f5e25d6d3006c78cd3775.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

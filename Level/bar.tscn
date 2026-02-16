@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://clx76fhy3rnqk"]
+
+[ext_resource type="PackedScene" uid="uid://c7bhhegbbb6ch" path="res://Level/barranco_bar__ps1_environmentoptimizedmobile.glb" id="1_3o0d1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jnf3u"]
+size = Vector3(18.47168, 1, 29.20044)
+
+[node name="Bar" unique_id=923736439 instance=ExtResource("1_3o0d1")]
+
+[node name="Circle_051_glass_0" parent="Sketchfab_model/25b3bb328c484378919eee85aa07d1df_fbx/RootNode/Circle_051" parent_id_path=PackedInt32Array(1160949554) index="0" unique_id=1479341613]
+transform = Transform3D(1, 0, 0, 0, 1, -4.2632564e-14, 0, 4.2632564e-14, 1, -0.056881376, -0.8226967, 0.008331537)
+cast_shadow = 0
+
+[node name="bottle_034_bar_atlas_0" parent="Sketchfab_model/25b3bb328c484378919eee85aa07d1df_fbx/RootNode/bottle_034" parent_id_path=PackedInt32Array(865846962) index="0" unique_id=1350876561]
+transform = Transform3D(0.9999999, 7.1054274e-15, 8.4703295e-22, -7.1054274e-15, 0.9999999, 9.052505e-22, -8.4703295e-22, 9.118729e-22, 0.9999999, 0.40365982, -5.9604645e-08, 0)
+
+[node name="Floor" type="StaticBody3D" parent="." index="1" unique_id=1772572796]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" index="0" unique_id=1779129002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0239258, -0.5, -24.447615)
+shape = SubResource("BoxShape3D_jnf3u")

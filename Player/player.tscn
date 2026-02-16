@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://d36ahxtquq5qb"]
+
+[ext_resource type="Script" uid="uid://wip3k2g63agw" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Shader" uid="uid://d0vd42y7p3gya" path="res://ScreenEffects.gdshader" id="2_btcbx"]
+[ext_resource type="Texture2D" uid="uid://dd0gk0o5sbsyi" path="res://icon.svg" id="3_btcbx"]
+[ext_resource type="Shader" uid="uid://b6kswqfdyei1q" path="res://OldStyle.gdshader" id="3_gwnis"]
+[ext_resource type="Shader" uid="uid://doudj48wi74cj" path="res://text.gdshader" id="5_fhl08"]
+[ext_resource type="FontFile" uid="uid://d0mg2libia004" path="res://HelpMe.ttf" id="5_k53q1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btcbx"]
+shader = ExtResource("2_btcbx")
+shader_parameter/strength = 0.05000000074506
+shader_parameter/edge_falloff = true
+shader_parameter/distortion_amount = -0.08
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwnis"]
+shader = ExtResource("3_gwnis")
+shader_parameter/shake = 0.015
+shader_parameter/noiseQuality = 250.0
+shader_parameter/noiseIntensity = 0.001
+shader_parameter/offsetIntensity = 0.0045
+shader_parameter/colorOffsetIntensity = 0.2
+shader_parameter/pixelSize = 900.0000427025
+shader_parameter/grainIntensity = 0.04
+shader_parameter/use_overlay = false
+shader_parameter/use_lens_distortion = true
+shader_parameter/overlay_color = Color(1, 1, 1, 10)
+shader_parameter/lens_distortion_strength = 0.010000000475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vtle1"]
+shader = ExtResource("5_fhl08")
+shader_parameter/jitter_strength = 2.0
+shader_parameter/jitter_speed = 4.00000018674012
+shader_parameter/jitter_frequency = 12.0
+shader_parameter/separate_xy = true
+shader_parameter/time_offset = 0.0
+shader_parameter/enable_rotation = true
+shader_parameter/rotation_strength = 5.0
+shader_parameter/rotation_speed = 0.75000003236512
+shader_parameter/rotation_frequency = 4.0
+shader_parameter/enable_scaling = true
+shader_parameter/scale_strength = 0.00800000038
+shader_parameter/scale_speed = 2.5
+shader_parameter/scale_frequency = 6.0
+shader_parameter/base_scale = 1.0
+shader_parameter/text_color = Color(0.82851833, 0.053728215, 0, 1)
+shader_parameter/use_custom_color = false
+shader_parameter/shake_intensity = 0.5
+shader_parameter/enable_pixelation = true
+shader_parameter/pixel_size = 4.0
+shader_parameter/adaptive_pixels = true
+shader_parameter/enable_outline = true
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_thickness = 1.0
+shader_parameter/chromatic_aberration = true
+shader_parameter/aberration_strength = 1.0
+
+[node name="Player" type="CharacterBody3D" unique_id=188617949]
+script = ExtResource("1_l8h54")
+
+[node name="StandingCollision" type="CollisionShape3D" parent="." unique_id=9372900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hvfyp")
+
+[node name="Head" type="Node3D" parent="." unique_id=1724512078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Eyes" type="Node3D" parent="Head" unique_id=1794514398]
+
+[node name="Camera3D" type="Camera3D" parent="Head/Eyes" unique_id=1164628794]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=142910861]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=897613594]
+material = SubResource("ShaderMaterial_btcbx")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1250232197]
+material = SubResource("ShaderMaterial_gwnis")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_btcbx")
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1383277676]
+visible = false
+material = SubResource("ShaderMaterial_vtle1")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.0
+offset_top = -18.5
+offset_right = 154.0
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7038526, 0.39825273, 0.23960987, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("5_k53q1")
+theme_override_font_sizes/font_size = 64
+text = "Press E To Drink"

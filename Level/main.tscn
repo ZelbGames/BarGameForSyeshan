@@ -1,0 +1,241 @@
+[gd_scene format=3 uid="uid://u7cs2cr708k7"]
+
+[ext_resource type="PackedScene" uid="uid://clx76fhy3rnqk" path="res://Level/bar.tscn" id="1_gqyk6"]
+[ext_resource type="PackedScene" uid="uid://d36ahxtquq5qb" path="res://Player/player.tscn" id="2_r23e8"]
+[ext_resource type="PackedScene" uid="uid://b6d46k2f2a40i" path="res://bartender/maiden.tscn" id="3_eo7o3"]
+[ext_resource type="Script" uid="uid://dtcbfqv20vjlb" path="res://Level/drink_collision.gd" id="4_q3hbn"]
+[ext_resource type="AudioStream" uid="uid://jkc6urh4mcd6" path="res://Audio/Four Voices Whispering Horror Film Sound Effects.mp3" id="5_76v5r"]
+[ext_resource type="AudioStream" uid="uid://cfi1ywukqocr0" path="res://Audio/Abandoned House Creaking, Wind, Sunset 15 Minutes of Ambience.mp3" id="5_oycwn"]
+[ext_resource type="AudioStream" uid="uid://bs56bup4gu32" path="res://Audio/Girl Trying To Cry Quietly Sound Effect Cut.mp3" id="6_y023f"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r23e8"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_eo7o3"]
+sky_material = SubResource("ProceduralSkyMaterial_r23e8")
+
+[sub_resource type="Environment" id="Environment_q3hbn"]
+background_mode = 2
+sky = SubResource("Sky_eo7o3")
+ambient_light_source = 1
+tonemap_mode = 2
+tonemap_exposure = 0.5
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+volumetric_fog_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eo7o3"]
+size = Vector3(1.2495117, 2.5136414, 1.3152275)
+
+[node name="Main" type="Node3D" unique_id=783773402]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=836905506]
+environment = SubResource("Environment_q3hbn")
+
+[node name="Bar" parent="." unique_id=923736439 instance=ExtResource("1_gqyk6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7935004, 0.014703274, 13.949261)
+
+[node name="Player" parent="." unique_id=188617949 groups=["Player"] instance=ExtResource("2_r23e8")]
+
+[node name="Lighting" type="Node3D" parent="." unique_id=371681138]
+
+[node name="TableByEntrance1" type="SpotLight3D" parent="Lighting" unique_id=193558478]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -3.6413493, 3.9328692, 0.18651769)
+spot_range = 4.4974084
+spot_angle = 40.0634
+
+[node name="TableByEntrance2" type="SpotLight3D" parent="Lighting" unique_id=962416213]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -3.6413493, 3.930157, -2.9209633)
+spot_range = 4.4974084
+spot_angle = 40.0634
+
+[node name="PaintingMiddleOfRoom" type="SpotLight3D" parent="Lighting" unique_id=460791978]
+transform = Transform3D(-0.2588191, -0.9659258, -1.8390203e-15, -4.2221963e-08, 1.1313341e-08, 1, -0.9659258, 0.2588191, -4.3711392e-08, -1.375095, 3.744984, -5.8894773)
+spot_range = 3.437429
+spot_angle = 45.428898
+
+[node name="Bar1" type="SpotLight3D" parent="Lighting" unique_id=246624277]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.1677914, 2.148365, -3.6387887)
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 2.6301277
+spot_angle = 52.945446
+
+[node name="Bar2" type="SpotLight3D" parent="Lighting" unique_id=722089735]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.1677914, 2.148365, -5.6521263)
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 2.6301277
+spot_angle = 52.945446
+
+[node name="Bar3" type="SpotLight3D" parent="Lighting" unique_id=801079563]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.1677914, 2.148365, -7.6513762)
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 2.6301277
+spot_angle = 52.945446
+
+[node name="Bar4" type="SpotLight3D" parent="Lighting" unique_id=450835154]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.1677914, 2.148365, -9.648378)
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 2.6301277
+spot_angle = 52.945446
+
+[node name="Bar5" type="SpotLight3D" parent="Lighting" unique_id=1763767961]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5.1944222, 2.148365, -2.15347)
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 2.6301277
+spot_angle = 52.945446
+
+[node name="Bar6" type="SpotLight3D" parent="Lighting" unique_id=517904580]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 5.1944222, 2.148365, -11.351997)
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 2.6301277
+spot_angle = 52.945446
+
+[node name="BackBar" type="OmniLight3D" parent="Lighting" unique_id=1358901824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5120911, 3.094338, -10.996095)
+light_color = Color(0.83880115, 0.70924824, 0.52261996, 1)
+light_energy = 0.2
+
+[node name="FrontBar" type="OmniLight3D" parent="Lighting" unique_id=1994182682]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12963647, 3.094338, -6.1832747)
+light_color = Color(0.83880115, 0.70924824, 0.52261996, 1)
+light_energy = 0.2
+
+[node name="DoorBar" type="OmniLight3D" parent="Lighting" unique_id=986714033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07699031, 3.0772374, -1.5309731)
+light_color = Color(0.83880115, 0.70924824, 0.52261996, 1)
+light_energy = 0.2
+
+[node name="BackBar2" type="OmniLight3D" parent="Lighting" unique_id=43039226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.402482, 3.094338, -14.918681)
+light_color = Color(0.83880115, 0.70924824, 0.52261996, 1)
+light_energy = 0.2
+
+[node name="TableAtBack1" type="SpotLight3D" parent="Lighting" unique_id=1403803525]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -3.6413493, 3.930157, -11.863885)
+spot_range = 4.4974084
+spot_angle = 40.0634
+
+[node name="TableAtBack2" type="SpotLight3D" parent="Lighting" unique_id=336702934]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -3.6413493, 3.930157, -8.873263)
+spot_range = 4.4974084
+spot_angle = 40.0634
+
+[node name="StairsAtBack" type="SpotLight3D" parent="Lighting" unique_id=1774008352]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -3.6413493, 3.930157, -15.516015)
+spot_range = 4.4974084
+spot_angle = 40.0634
+
+[node name="Toilet1" type="OmniLight3D" parent="Lighting" unique_id=1891680414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4649725, 2.3361197, -14.179733)
+light_color = Color(0.5058824, 0.4117647, 0, 1)
+light_energy = 0.2
+light_volumetric_fog_energy = 10.0
+shadow_enabled = true
+
+[node name="Toilet2" type="OmniLight3D" parent="Lighting" unique_id=2116939723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.4649725, 2.3361197, -15.987812)
+light_color = Color(0.5058824, 0.4117647, 0, 1)
+light_energy = 0.2
+light_volumetric_fog_energy = 10.0
+shadow_enabled = true
+
+[node name="BackTables1" type="OmniLight3D" parent="Lighting" unique_id=2049664960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5729301, 3.6541734, -18.7874)
+light_color = Color(0.65882355, 0.28627452, 0.039215688, 1)
+light_energy = 0.2
+omni_range = 1.8346313
+
+[node name="BackTables2" type="OmniLight3D" parent="Lighting" unique_id=1062060226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4071667, 3.6541734, -20.41847)
+light_color = Color(0.65877175, 0.28779292, 0.038700685, 1)
+light_energy = 0.2
+omni_range = 1.8346313
+
+[node name="BackTables3" type="OmniLight3D" parent="Lighting" unique_id=614238729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.324829, 3.6541734, -20.318243)
+light_color = Color(0.65882355, 0.28627452, 0.039215688, 1)
+light_energy = 0.2
+omni_range = 2.1646762
+
+[node name="BackTables4" type="SpotLight3D" parent="Lighting" unique_id=1591659525]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 6.716641, 3.6034606, -18.7874)
+light_color = Color(0.65882355, 0.28627452, 0.039215688, 1)
+light_energy = 1.305
+shadow_enabled = true
+spot_range = 2.097424
+spot_angle = 63.38103
+
+[node name="BackTables5" type="SpotLight3D" parent="Lighting" unique_id=1227590479]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 3.324829, 3.5631921, -20.318243)
+light_color = Color(0.65882355, 0.28627452, 0.039215688, 1)
+light_energy = 1.305
+shadow_enabled = true
+spot_range = 2.5280845
+spot_angle = 63.38103
+
+[node name="BackTables6" type="SpotLight3D" parent="Lighting" unique_id=1615639080]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.63988036, 3.4462898, -18.7874)
+light_color = Color(0.65882355, 0.28627452, 0.039215688, 1)
+light_energy = 1.305
+shadow_enabled = true
+spot_range = 2.097424
+spot_angle = 63.38103
+
+[node name="BackTables7" type="SpotLight3D" parent="Lighting" unique_id=1693118627]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -2.4225347, 3.4462898, -20.483177)
+light_color = Color(0.65882355, 0.28627452, 0.039215688, 1)
+light_energy = 1.305
+shadow_enabled = true
+spot_range = 2.097424
+spot_angle = 63.38103
+
+[node name="BackTables8" type="OmniLight3D" parent="Lighting" unique_id=1532815733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.715357, 3.6541734, -18.868992)
+light_color = Color(0.65882355, 0.28627452, 0.039215688, 1)
+light_energy = 0.2
+omni_range = 2.1646762
+
+[node name="Sketchfab_Scene" parent="." unique_id=1527975646 instance=ExtResource("3_eo7o3")]
+transform = Transform3D(-6.556708e-10, 0, 0.015, 0, 0.015, 0, -0.015, 0, -6.556708e-10, 0.5713799, -2.7947679, -17.654257)
+
+[node name="DrinkCollision" type="Area3D" parent="." unique_id=1607413665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8586287, 0.91809976, -5.683438)
+script = ExtResource("4_q3hbn")
+
+[node name="Whispers" type="AudioStreamPlayer3D" parent="DrinkCollision" unique_id=108065517]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18398142, 0.27401674, 0.056639194)
+stream = ExtResource("5_76v5r")
+attenuation_model = 2
+parameters/looping = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DrinkCollision" unique_id=1684177908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10321164, 0.23108613, 0.08464813)
+shape = SubResource("BoxShape3D_eo7o3")
+
+[node name="Ambience" type="AudioStreamPlayer3D" parent="." unique_id=962783550]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.942499, 1.7737452, -7.9066815)
+stream = ExtResource("5_oycwn")
+attenuation_model = 3
+volume_db = 6.0
+max_db = 6.0
+autoplay = true
+parameters/looping = true
+
+[node name="GirlCrying" type="AudioStreamPlayer3D" parent="." unique_id=328586366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0524683, 1.5012472, -5.7049203)
+stream = ExtResource("6_y023f")
+attenuation_model = 1
+autoplay = true
+parameters/looping = true
+
+[connection signal="body_entered" from="DrinkCollision" to="DrinkCollision" method="_on_body_entered"]
+[connection signal="body_exited" from="DrinkCollision" to="DrinkCollision" method="_on_body_exited"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfi1ywukqocr0"
+path="res://.godot/imported/Abandoned House Creaking, Wind, Sunset 15 Minutes of Ambience.mp3-02d6a0ad4b2c47ac00e67bf974fbc887.mp3str"
+
+[deps]
+
+source_file="res://Audio/Abandoned House Creaking, Wind, Sunset 15 Minutes of Ambience.mp3"
+dest_files=["res://.godot/imported/Abandoned House Creaking, Wind, Sunset 15 Minutes of Ambience.mp3-02d6a0ad4b2c47ac00e67bf974fbc887.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
