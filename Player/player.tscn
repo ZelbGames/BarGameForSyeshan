@@ -112,6 +112,26 @@ theme_override_fonts/font = ExtResource("5_k53q1")
 theme_override_font_sizes/font_size = 64
 text = "Press E To Drink"
 
+[node name="Label2" type="Label" parent="CanvasLayer" unique_id=1171517193]
+visible = false
+material = SubResource("ShaderMaterial_vtle1")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -308.5
+offset_top = -37.0
+offset_right = 308.5
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.7038526, 0.39825273, 0.23960987, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("5_k53q1")
+theme_override_font_sizes/font_size = 64
+text = "Press E To Leave"
+
 [node name="TextureRect2" type="TextureRect" parent="CanvasLayer" unique_id=107489130]
 visible = false
 anchors_preset = 15

@@ -7,6 +7,8 @@ extends CharacterBody3D
 @onready var standing_collision: CollisionShape3D = $StandingCollision
 
 @onready var label: Label = $CanvasLayer/Label
+@onready var label_2: Label = $CanvasLayer/Label2
+
 
 @onready var texture_rect_2: TextureRect = $CanvasLayer/TextureRect2
 @onready var texture_rect_3: TextureRect = $CanvasLayer/TextureRect3

@@ -1,6 +1,7 @@
 extends Area3D
 
 @onready var whispers: AudioStreamPlayer3D = $Whispers
+@onready var jump_scare_sound_effect: AudioStreamPlayer3D = $JumpScareSoundEffect
 
 var can_end : bool = false
 
@@ -22,16 +23,15 @@ func _on_body_exited(body: Node3D) -> void:
 
 func _input(_event: InputEvent) -> void:
 	if can_end and Input.is_action_just_pressed("interact"):
+		jump_scare_sound_effect.play()
 		player.texture_rect_2.visible = true
-		var master_bus_idx = AudioServer.get_bus_index("Master")
-		AudioServer.set_bus_mute(master_bus_idx, true)
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.3).timeout
 		player.texture_rect_3.visible = true
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.3).timeout
 		player.texture_rect_4.visible = true
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.3).timeout
 		player.texture_rect_5.visible = true
-		get_tree().quit()
+		get_tree().reload_current_scene()
 		player.texture_rect_2.visible = false
 		player.texture_rect_3.visible = false
 		player.texture_rect_4.visible = false
