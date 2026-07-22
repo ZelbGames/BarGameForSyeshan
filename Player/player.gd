@@ -8,6 +8,12 @@ extends CharacterBody3D
 
 @onready var label: Label = $CanvasLayer/Label
 
+@onready var texture_rect_2: TextureRect = $CanvasLayer/TextureRect2
+@onready var texture_rect_3: TextureRect = $CanvasLayer/TextureRect3
+@onready var texture_rect_4: TextureRect = $CanvasLayer/TextureRect4
+@onready var texture_rect_5: TextureRect = $CanvasLayer/TextureRect5
+
+
 
 #Movement Variables
 const walking_speed : float = 2.0

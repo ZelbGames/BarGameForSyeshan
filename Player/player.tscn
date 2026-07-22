@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://b6kswqfdyei1q" path="res://OldStyle.gdshader" id="3_gwnis"]
 [ext_resource type="Shader" uid="uid://doudj48wi74cj" path="res://text.gdshader" id="5_fhl08"]
 [ext_resource type="FontFile" uid="uid://d0mg2libia004" path="res://HelpMe.ttf" id="5_k53q1"]
+[ext_resource type="Texture2D" uid="uid://bus7g7lay6t5l" path="res://crying_girl.png" id="7_vtle1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
@@ -110,3 +111,51 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("5_k53q1")
 theme_override_font_sizes/font_size = 64
 text = "Press E To Drink"
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer" unique_id=107489130]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_vtle1")
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer" unique_id=609200157]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1360.0
+offset_top = -428.0
+offset_right = 1397.5
+offset_bottom = 757.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_vtle1")
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer" unique_id=1592729804]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1538.0
+offset_top = -416.0
+offset_right = 1735.1665
+offset_bottom = 782.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_vtle1")
+
+[node name="TextureRect5" type="TextureRect" parent="CanvasLayer" unique_id=759447970]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2094.0
+offset_top = -671.0
+offset_right = 2164.1343
+offset_bottom = 938.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_vtle1")
