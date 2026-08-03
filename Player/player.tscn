@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://b6kswqfdyei1q" path="res://OldStyle.gdshader" id="3_gwnis"]
 [ext_resource type="Shader" uid="uid://doudj48wi74cj" path="res://text.gdshader" id="5_fhl08"]
 [ext_resource type="FontFile" uid="uid://d0mg2libia004" path="res://HelpMe.ttf" id="5_k53q1"]
+[ext_resource type="Script" uid="uid://gh8dspfex8xd" path="res://Player/peeing.gd" id="7_vtle1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hvfyp"]
 
@@ -56,6 +57,22 @@ shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_thickness = 1.0
 shader_parameter/chromatic_aberration = true
 shader_parameter/aberration_strength = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vtle1"]
+particle_flag_align_y = true
+direction = Vector3(0, 0.2, -1)
+spread = 0.0
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vtle1"]
+transparency = 1
+albedo_color = Color(0.68757266, 0.67744243, 0.3690747, 0.6392157)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vtle1"]
+material = SubResource("StandardMaterial3D_vtle1")
+radius = 0.1
+height = 0.3
 
 [node name="Player" type="CharacterBody3D" unique_id=188617949]
 script = ExtResource("1_l8h54")
@@ -110,3 +127,12 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("5_k53q1")
 theme_override_font_sizes/font_size = 64
 text = "Press E To Drink"
+
+[node name="Peeing" type="Node" parent="." unique_id=860762577]
+script = ExtResource("7_vtle1")
+
+[node name="PeeStream" type="GPUParticles3D" parent="." unique_id=1952539779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0127064, 0)
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_vtle1")
+draw_pass_1 = SubResource("CapsuleMesh_vtle1")

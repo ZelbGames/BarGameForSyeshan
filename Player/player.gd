@@ -7,6 +7,7 @@ extends CharacterBody3D
 @onready var standing_collision: CollisionShape3D = $StandingCollision
 
 @onready var label: Label = $CanvasLayer/Label
+@onready var peeing: Node = $Peeing
 
 
 #Movement Variables
@@ -60,6 +61,11 @@ func _input(event: InputEvent) -> void:
 		rotate_y(deg_to_rad(-event.relative.x) * mouse_sensitivity )
 		head.rotate_x( deg_to_rad(-event.relative.y) * mouse_sensitivity )
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-85.0), deg_to_rad(85.0))
+	
+	if event.is_action_pressed("Pee"):
+		peeing.pee()
+	if event.is_action_released("Pee"):
+		peeing.stop_pee()
 	
 
 func _physics_process(delta: float) -> void:
