@@ -12,12 +12,12 @@ config_version=5
 
 config/name="HorrorGameShowcaseSyeshan"
 run/main_scene="uid://u7cs2cr708k7"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
-[display]
+[autoload]
 
-window/size/mode=3
+UiSignals="*uid://do78nrsnuv66h"
 
 [input]
 

@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://u7cs2cr708k7"]
 
 [ext_resource type="PackedScene" uid="uid://clx76fhy3rnqk" path="res://Level/bar.tscn" id="1_gqyk6"]
-[ext_resource type="PackedScene" uid="uid://d36ahxtquq5qb" path="res://Player/player.tscn" id="2_r23e8"]
-[ext_resource type="PackedScene" uid="uid://b6d46k2f2a40i" path="res://bartender/maiden.tscn" id="3_eo7o3"]
-[ext_resource type="Script" uid="uid://dtcbfqv20vjlb" path="res://Level/drink_collision.gd" id="4_q3hbn"]
+[ext_resource type="Script" uid="uid://c6mo3ujjlbcpy" path="res://Player/static/static_player.gd" id="3_eo7o3"]
+[ext_resource type="AudioStream" uid="uid://cq6ju0fdv6r8v" path="res://Audio/horrorambience2.mp3" id="3_vshon"]
+[ext_resource type="Script" uid="uid://b63sy8ypthrr5" path="res://Level/switch_camera_ui.gd" id="4_c8g86"]
+[ext_resource type="Texture2D" uid="uid://w4nudpvu57m7" path="res://Player/static/UI_Art/backward.png" id="4_q3hbn"]
 [ext_resource type="AudioStream" uid="uid://jkc6urh4mcd6" path="res://Audio/Four Voices Whispering Horror Film Sound Effects.mp3" id="5_76v5r"]
 [ext_resource type="AudioStream" uid="uid://cfi1ywukqocr0" path="res://Audio/Abandoned House Creaking, Wind, Sunset 15 Minutes of Ambience.mp3" id="5_oycwn"]
-[ext_resource type="AudioStream" uid="uid://bs56bup4gu32" path="res://Audio/Girl Trying To Cry Quietly Sound Effect Cut.mp3" id="6_y023f"]
+[ext_resource type="Texture2D" uid="uid://b7srjir4x1amm" path="res://Player/static/UI_Art/forward.png" id="5_y023f"]
+[ext_resource type="Texture2D" uid="uid://deqr2sn4tk21h" path="res://Player/static/UI_Art/down.png" id="6_y023f"]
+[ext_resource type="Texture2D" uid="uid://depwnqmcykoms" path="res://Player/static/UI_Art/up.png" id="7_76v5r"]
+[ext_resource type="Shader" uid="uid://b6kswqfdyei1q" path="res://OldStyle.gdshader" id="9_wt2cp"]
+[ext_resource type="Texture2D" uid="uid://dd0gk0o5sbsyi" path="res://icon.svg" id="10_yo3sj"]
+[ext_resource type="Texture2D" uid="uid://bu7r727pqw7lu" path="res://debug_imgae.jpg" id="11_yo3sj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r23e8"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,8 +33,48 @@ ssil_enabled = true
 volumetric_fog_enabled = true
 adjustment_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_eo7o3"]
-size = Vector3(1.2495117, 2.5136414, 1.3152275)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eo7o3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c17l7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c8g86"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wt2cp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yo3sj"]
+
+[sub_resource type="Theme" id="Theme_c8g86"]
+Button/styles/focus = SubResource("StyleBoxEmpty_c17l7")
+Button/styles/hover = SubResource("StyleBoxEmpty_c8g86")
+Button/styles/normal = SubResource("StyleBoxEmpty_wt2cp")
+Button/styles/pressed = SubResource("StyleBoxEmpty_yo3sj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdxbv"]
+shader = ExtResource("9_wt2cp")
+shader_parameter/shake = 0.015
+shader_parameter/noiseQuality = 250.0
+shader_parameter/noiseIntensity = 0.001
+shader_parameter/offsetIntensity = 0.0045
+shader_parameter/colorOffsetIntensity = 0.2
+shader_parameter/pixelSize = 900.0000427025
+shader_parameter/grainIntensity = 0.04
+shader_parameter/use_overlay = false
+shader_parameter/use_lens_distortion = true
+shader_parameter/overlay_color = Color(1, 1, 1, 10)
+shader_parameter/lens_distortion_strength = 0.010000000475
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vshon"]
+viewport_path = NodePath("Recipe/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yo3sj"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_vshon")
+emission_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_0ouis"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_yo3sj")
+size = Vector2(0.5, 0.5)
 
 [node name="Main" type="Node3D" unique_id=783773402]
 
@@ -37,8 +83,6 @@ environment = SubResource("Environment_q3hbn")
 
 [node name="Bar" parent="." unique_id=923736439 instance=ExtResource("1_gqyk6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7935004, 0.014703274, 13.949261)
-
-[node name="Player" parent="." unique_id=188617949 groups=["Player"] instance=ExtResource("2_r23e8")]
 
 [node name="Lighting" type="Node3D" parent="." unique_id=371681138]
 
@@ -204,22 +248,10 @@ light_color = Color(0.65882355, 0.28627452, 0.039215688, 1)
 light_energy = 0.2
 omni_range = 2.1646762
 
-[node name="Sketchfab_Scene" parent="." unique_id=1527975646 instance=ExtResource("3_eo7o3")]
-transform = Transform3D(-6.556708e-10, 0, 0.015, 0, 0.015, 0, -0.015, 0, -6.556708e-10, 0.5713799, -2.7947679, -17.654257)
-
-[node name="DrinkCollision" type="Area3D" parent="." unique_id=1607413665]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8586287, 0.91809976, -5.683438)
-script = ExtResource("4_q3hbn")
-
-[node name="Whispers" type="AudioStreamPlayer3D" parent="DrinkCollision" unique_id=108065517]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18398142, 0.27401674, 0.056639194)
-stream = ExtResource("5_76v5r")
-attenuation_model = 2
-parameters/looping = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DrinkCollision" unique_id=1684177908]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10321164, 0.23108613, 0.08464813)
-shape = SubResource("BoxShape3D_eo7o3")
+[node name="DrinksCabinetLight" type="OmniLight3D" parent="Lighting" unique_id=2027985685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.406529, 1.2085788, -8.854369)
+light_color = Color(0.9737211, 0.77862877, 0.4941044, 1)
+omni_range = 2.0
 
 [node name="Ambience" type="AudioStreamPlayer3D" parent="." unique_id=962783550]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.942499, 1.7737452, -7.9066815)
@@ -230,12 +262,147 @@ max_db = 6.0
 autoplay = true
 parameters/looping = true
 
-[node name="GirlCrying" type="AudioStreamPlayer3D" parent="." unique_id=328586366]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.0524683, 1.5012472, -5.7049203)
-stream = ExtResource("6_y023f")
-attenuation_model = 1
+[node name="Ambience2" type="AudioStreamPlayer3D" parent="." unique_id=493562796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.942499, 1.7737452, -7.9066815)
+stream = ExtResource("3_vshon")
+attenuation_model = 3
+volume_db = -15.0
+max_db = 6.0
 autoplay = true
 parameters/looping = true
 
-[connection signal="body_entered" from="DrinkCollision" to="DrinkCollision" method="_on_body_entered"]
-[connection signal="body_exited" from="DrinkCollision" to="DrinkCollision" method="_on_body_exited"]
+[node name="voice" type="AudioStreamPlayer3D" parent="." unique_id=27358374]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.942499, 1.7737452, -7.9066815)
+stream = ExtResource("5_76v5r")
+attenuation_model = 3
+volume_db = -10.0
+max_db = 6.0
+autoplay = true
+parameters/looping = true
+
+[node name="StaticPlayer" type="CharacterBody3D" parent="." unique_id=1889640499 groups=["Player"]]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.610323, 0, -8.569157)
+script = ExtResource("3_eo7o3")
+
+[node name="StandingCollision" type="CollisionShape3D" parent="StaticPlayer" unique_id=49704309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_eo7o3")
+
+[node name="Head" type="Node3D" parent="StaticPlayer" unique_id=224433126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="Eyes" type="Node3D" parent="StaticPlayer/Head" unique_id=1398491702]
+
+[node name="Camera3D" type="Camera3D" parent="StaticPlayer/Head/Eyes" unique_id=950777423]
+
+[node name="CustomerPosition" type="Node3D" parent="StaticPlayer" unique_id=638034305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -3)
+
+[node name="RecipePosition" type="Node3D" parent="StaticPlayer" unique_id=521283197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9443618, -0.8741436)
+
+[node name="DrinksPosition" type="Node3D" parent="StaticPlayer" unique_id=649233963]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1974515, 1.6352291)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="StaticPlayer" unique_id=365151132]
+
+[node name="SwitchCameraUI" type="Control" parent="StaticPlayer/CanvasLayer" unique_id=1080357244 node_paths=PackedStringArray("static_player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_c8g86")
+script = ExtResource("4_c8g86")
+static_player = NodePath("../..")
+
+[node name="Left" type="Button" parent="StaticPlayer/CanvasLayer/SwitchCameraUI" unique_id=222241760]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -280.0
+offset_right = 80.0
+offset_bottom = 280.0
+grow_vertical = 2
+icon = ExtResource("4_q3hbn")
+
+[node name="Right" type="Button" parent="StaticPlayer/CanvasLayer/SwitchCameraUI" unique_id=1893104035]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -280.0
+offset_bottom = 280.0
+grow_horizontal = 0
+grow_vertical = 2
+icon = ExtResource("5_y023f")
+
+[node name="Down" type="Button" parent="StaticPlayer/CanvasLayer/SwitchCameraUI" unique_id=1080601314]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -80.0
+offset_right = 280.0
+grow_horizontal = 2
+grow_vertical = 0
+icon = ExtResource("6_y023f")
+icon_alignment = 1
+
+[node name="Up" type="Button" parent="StaticPlayer/CanvasLayer/SwitchCameraUI" unique_id=1905352857]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -280.0
+offset_right = 280.0
+offset_bottom = 80.0
+grow_horizontal = 2
+icon = ExtResource("7_76v5r")
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="StaticPlayer/CanvasLayer" unique_id=794891465]
+material = SubResource("ShaderMaterial_tdxbv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("10_yo3sj")
+
+[node name="Recipe" type="Node3D" parent="." unique_id=1988396407]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7224772, 0.62526876, -8.551468)
+
+[node name="SubViewport" type="SubViewport" parent="Recipe" unique_id=2101310288]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(480, 480)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="Recipe/SubViewport" unique_id=1406773754]
+offset_right = 480.0
+offset_bottom = 480.0
+texture = ExtResource("11_yo3sj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Recipe" unique_id=752118]
+transform = Transform3D(-1.4901161e-08, 0.9659258, 0.25881907, 3.7252903e-08, 0.25881907, -0.9659258, -1, 0, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_0ouis")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Recipe" unique_id=280409645]
+transform = Transform3D(0.75157094, -2.883432e-08, 0.6596523, -0.6596523, -3.2852213e-08, 0.75157094, 5.702035e-16, -1, -4.3711392e-08, 0.33199954, 0.35900003, 0)
+spot_range = 1.0
+
+[connection signal="mouse_entered" from="StaticPlayer/CanvasLayer/SwitchCameraUI/Left" to="StaticPlayer/CanvasLayer/SwitchCameraUI" method="_on_left_mouse_entered"]
+[connection signal="mouse_entered" from="StaticPlayer/CanvasLayer/SwitchCameraUI/Right" to="StaticPlayer/CanvasLayer/SwitchCameraUI" method="_on_right_mouse_entered"]
+[connection signal="mouse_entered" from="StaticPlayer/CanvasLayer/SwitchCameraUI/Down" to="StaticPlayer/CanvasLayer/SwitchCameraUI" method="_on_down_mouse_entered"]
+[connection signal="mouse_entered" from="StaticPlayer/CanvasLayer/SwitchCameraUI/Up" to="StaticPlayer/CanvasLayer/SwitchCameraUI" method="_on_up_mouse_entered"]
