@@ -1,6 +1,9 @@
 class_name StaticPlayer
 extends CharacterBody3D
 
+signal hide_bottle_highlight
+
+
 enum LookingAt {
 	CUSTOMER,
 	RECIPE,
@@ -8,6 +11,8 @@ enum LookingAt {
 }
 
 var currently_looking_at : LookingAt = LookingAt.CUSTOMER
+
+@export var ray_cast : Node3D
 
 @onready var customer_position: Node3D = $CustomerPosition
 @onready var recipe_position: Node3D = $RecipePosition
@@ -27,6 +32,21 @@ func _ready() -> void:
 	positions_to_look_at.append(drinks_position.global_position)
 	
 	connect_signals()
+
+
+func _physics_process(delta: float) -> void:
+	#highlight drinks and collide them
+	if currently_looking_at == LookingAt.DRINKS and ray_cast:
+		var hits : Dictionary = ray_cast.raycast_from_mouse()
+		var collider = hits.get("collider")
+		if collider: 
+				collider.highlight.show()
+		else:
+			hide_bottle_highlight.emit()
+	else:
+		hide_bottle_highlight.emit()
+
+
 
 func connect_signals() -> void:
 	UiSignals.look_at_customer.connect(look_at_customer)
