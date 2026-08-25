@@ -23,6 +23,11 @@ UiSignals="*uid://do78nrsnuv66h"
 
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+Bottles=""
+CurrentlySelectedGlass=""
+
 [input]
 
 forward={

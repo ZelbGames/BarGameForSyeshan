@@ -11,14 +11,11 @@ func raycast_from_mouse() -> Dictionary:
 	if !camera:
 		return {}
 	var viewport := get_viewport()
-	print("Started Trace")
 	
 	
 	var mouse_pos := viewport.get_mouse_position()
 	var origin := camera.project_ray_origin(mouse_pos)
-	print(origin)
 	var end := origin + camera.project_ray_normal(mouse_pos)  * ray_length
-	print(end)
 	
 	var space_state := get_world_3d().direct_space_state
 	var query := PhysicsRayQueryParameters3D.create(origin,end, collision_mask)

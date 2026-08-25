@@ -33,7 +33,7 @@ func _ready() -> void:
 	
 	connect_signals()
 
-
+var current_highlighted_bottle : Bottle
 func _physics_process(delta: float) -> void:
 	#highlight drinks and collide them
 	if currently_looking_at == LookingAt.DRINKS and ray_cast:
@@ -41,11 +41,26 @@ func _physics_process(delta: float) -> void:
 		var collider = hits.get("collider")
 		if collider: 
 				collider.highlight.show()
+				if collider != current_highlighted_bottle:
+					current_highlighted_bottle = collider
 		else:
+			if current_highlighted_bottle:
+				current_highlighted_bottle.stop_pour()
+			current_highlighted_bottle = null
 			hide_bottle_highlight.emit()
 	else:
+		current_highlighted_bottle = null
 		hide_bottle_highlight.emit()
+		if current_highlighted_bottle:
+			current_highlighted_bottle.stop_pour()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("primary"):
+		if current_highlighted_bottle:
+			current_highlighted_bottle.pour_drink()
+	if event.is_action_released("primary"):
+		if current_highlighted_bottle:
+			current_highlighted_bottle.stop_pour()
 
 
 func connect_signals() -> void:
