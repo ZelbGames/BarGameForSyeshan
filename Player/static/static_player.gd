@@ -25,6 +25,8 @@ var positions_to_look_at : Array[Vector3] = []
 #time in seconds to switch between camera positions
 @export var camera_speed : float = 1.0
 
+var can_pour : bool = false
+
 func _ready() -> void:
 	camera_3d.look_at(customer_position.global_position)
 	positions_to_look_at.append(customer_position.global_position)
@@ -36,7 +38,7 @@ func _ready() -> void:
 var current_highlighted_bottle : Bottle
 func _physics_process(delta: float) -> void:
 	#highlight drinks and collide them
-	if currently_looking_at == LookingAt.DRINKS and ray_cast:
+	if (currently_looking_at == LookingAt.DRINKS or currently_looking_at == LookingAt.CUSTOMER) and ray_cast:
 		var hits : Dictionary = ray_cast.raycast_from_mouse()
 		var collider = hits.get("collider")
 		if collider: 
@@ -54,13 +56,33 @@ func _physics_process(delta: float) -> void:
 		if current_highlighted_bottle:
 			current_highlighted_bottle.stop_pour()
 
+
+
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("primary"):
+	#pour drink
+	if event.is_action_pressed("primary") and can_pour:
 		if current_highlighted_bottle:
 			current_highlighted_bottle.pour_drink()
 	if event.is_action_released("primary"):
 		if current_highlighted_bottle:
 			current_highlighted_bottle.stop_pour()
+	
+	#move the bottle
+	if event.is_action_released("seconday") and current_highlighted_bottle:
+		current_highlighted_bottle.pickup_bottle()
+	
+	if event.is_action_released("interact") and current_highlighted_bottle:
+		check_interaction()
+
+
+func check_interaction() -> void:
+	# Check if the raycast is hitting an interactable object [00:00:41]
+	if current_highlighted_bottle:
+		
+		# Locate the InteractionComponent on the hit object
+		var interaction_component = current_highlighted_bottle.get_node_or_null("InteractionComponent") as InteractionComponent
+		if interaction_component:
+			interaction_component.interact()
 
 
 func connect_signals() -> void:
@@ -79,6 +101,7 @@ func connect_signals() -> void:
 
 
 #CAMERA MOVEMENT -----------------------------
+#DEPRICATED
 func look_at_next_position() -> void:
 	var next_pos_index = (currently_looking_at + 1 ) % 3
 	#sets an enum by an int value
@@ -97,14 +120,17 @@ func look_at_prev_position() -> void:
 func look_at_customer() -> void:
 	currently_looking_at = LookingAt.CUSTOMER
 	look_at_smooth(positions_to_look_at[LookingAt.CUSTOMER])
+	can_pour = true
 
 func look_at_recipe() -> void:
 	currently_looking_at = LookingAt.RECIPE
 	look_at_smooth(positions_to_look_at[LookingAt.RECIPE])
+	can_pour = false
 
 func look_at_drinks() -> void:
 	currently_looking_at = LookingAt.DRINKS
 	look_at_smooth(positions_to_look_at[LookingAt.DRINKS])
+	can_pour = false
 
 #SMOOTH CAMERA MOVEMENT---------------------
 #ALL THIS COULD AND SHOULD BE ON THE CAMERA

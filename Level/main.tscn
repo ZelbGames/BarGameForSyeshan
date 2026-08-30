@@ -16,7 +16,13 @@
 [ext_resource type="Script" uid="uid://b5608v74m254r" path="res://bartender/bottle.gd" id="14_0durp"]
 [ext_resource type="Shader" uid="uid://c577q6whnxg5w" path="res://Highlight.gdshader" id="14_7sxce"]
 [ext_resource type="Script" uid="uid://d2aqg616xdal7" path="res://Player/camera_ray_caster.gd" id="14_kdgia"]
+[ext_resource type="Shader" uid="uid://dourpl56x777p" path="res://bartender/3DLiquid.gdshader" id="16_uuvck"]
 [ext_resource type="Script" uid="uid://cn1p4luai0h1g" path="res://bartender/glass.gd" id="17_8qslo"]
+[ext_resource type="PackedScene" uid="uid://2bkjgj0prjkn" path="res://Art/SimpleGlass.glb" id="17_r72wd"]
+[ext_resource type="Script" uid="uid://845d7fueyvjq" path="res://bartender/bottles_area.gd" id="18_01iop"]
+[ext_resource type="Script" uid="uid://b0uucnnrgqayn" path="res://bartender/bottle_slot.gd" id="19_01iop"]
+[ext_resource type="Script" uid="uid://cxld7rbwh5ybl" path="res://bartender/pickup_component.gd" id="22_2swed"]
+[ext_resource type="Script" uid="uid://tsjtl3ywr0jh" path="res://bartender/interaction_component.gd" id="22_l35oh"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r23e8"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -80,16 +86,36 @@ resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_yo3sj")
 size = Vector2(0.5, 0.5)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_01iop"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r72wd"]
+render_priority = 1
+shader = ExtResource("16_uuvck")
+shader_parameter/_FillColor = Color(1, 0, 0, 1)
+shader_parameter/_SurfaceColor = Color(0, 0, 1, 1)
+shader_parameter/_FillLevel = -1.0
+shader_parameter/_MaxHeight = 0.26
+shader_parameter/_AngleZ = 0.0
+shader_parameter/_AngleX = 0.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_0durp"]
+size = Vector3(0.1, 0.1, 0.1)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_vshon"]
-height = 0.3
-radius = 0.1
+height = 0.4
+radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8qslo"]
+albedo_color = Color(0.52454257, 0.25765347, 0.04650923, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_vshon"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.3
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sxce"]
+material = SubResource("StandardMaterial3D_8qslo")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdgia"]
 render_priority = 0
@@ -99,12 +125,17 @@ shader_parameter/highlight_power = 10.0
 shader_parameter/highlight_intensity = 0.2000000095
 shader_parameter/rim_power = 1.50000002375
 
-[sub_resource type="PrismMesh" id="PrismMesh_0durp"]
-size = Vector3(0.1, 0.1, 0.1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8qslo"]
+height = 0.25
+radius = 0.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0durp"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.39215687)
+[sub_resource type="CylinderMesh" id="CylinderMesh_8qslo"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7sxce"]
+albedo_color = Color(1, 1, 0, 1)
 
 [node name="Main" type="Node3D" unique_id=783773402]
 
@@ -313,7 +344,7 @@ parameters/looping = true
 [node name="StaticPlayer" type="CharacterBody3D" parent="." unique_id=1889640499 node_paths=PackedStringArray("ray_cast") groups=["Player"]]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.610323, 0, -8.569157)
 script = ExtResource("3_eo7o3")
-ray_cast = NodePath("../CameraRayCaster")
+ray_cast = NodePath("CameraRayCaster")
 
 [node name="StandingCollision" type="CollisionShape3D" parent="StaticPlayer" unique_id=49704309]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -410,6 +441,12 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("10_yo3sj")
 
+[node name="CameraRayCaster" type="Node3D" parent="StaticPlayer" unique_id=1228103027 node_paths=PackedStringArray("camera", "bottle_highlight")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8.569157, 0, -4.6103234)
+script = ExtResource("14_kdgia")
+camera = NodePath("../Head/Eyes/Camera3D")
+bottle_highlight = NodePath("../../StoredBottles/Position1/Whiskey/Highlight")
+
 [node name="Recipe" type="Node3D" parent="." unique_id=1988396407]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7224772, 0.62526876, -8.551468)
 
@@ -433,78 +470,21 @@ mesh = SubResource("PlaneMesh_0ouis")
 transform = Transform3D(0.75157094, -2.883432e-08, 0.6596523, -0.6596523, -3.2852213e-08, 0.75157094, 5.702035e-16, -1, -4.3711392e-08, 0.33199954, 0.35900003, 0)
 spot_range = 1.0
 
-[node name="Bottle" type="StaticBody3D" parent="." unique_id=1481019791 node_paths=PackedStringArray("player") groups=["Bottles"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.443837, 1.118324, -8.685386)
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("14_0durp")
-player = NodePath("../StaticPlayer")
-drink_name = "Whiskey"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bottle" unique_id=1139347409]
-shape = SubResource("CylinderShape3D_vshon")
-metadata/_edit_lock_ = true
-
-[node name="Bottle" type="MeshInstance3D" parent="Bottle" unique_id=641742705]
-mesh = SubResource("CylinderMesh_vshon")
-surface_material_override/0 = SubResource("StandardMaterial3D_7sxce")
-metadata/_edit_lock_ = true
-
-[node name="Highlight" type="MeshInstance3D" parent="Bottle" unique_id=733810419]
-visible = false
-mesh = SubResource("CylinderMesh_vshon")
-surface_material_override/0 = SubResource("ShaderMaterial_kdgia")
-metadata/_edit_lock_ = true
-
-[node name="Bottle2" type="StaticBody3D" parent="." unique_id=94926828 node_paths=PackedStringArray("player") groups=["Bottles"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.443837, 1.118324, -8.984961)
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("14_0durp")
-player = NodePath("../StaticPlayer")
-drink_name = "Lemonade"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Bottle2" unique_id=367850366]
-shape = SubResource("CylinderShape3D_vshon")
-metadata/_edit_lock_ = true
-
-[node name="Bottle" type="MeshInstance3D" parent="Bottle2" unique_id=1677149942]
-mesh = SubResource("CylinderMesh_vshon")
-surface_material_override/0 = SubResource("StandardMaterial3D_7sxce")
-metadata/_edit_lock_ = true
-
-[node name="Highlight" type="MeshInstance3D" parent="Bottle2" unique_id=422066658]
-visible = false
-mesh = SubResource("CylinderMesh_vshon")
-surface_material_override/0 = SubResource("ShaderMaterial_kdgia")
-metadata/_edit_lock_ = true
-
-[node name="CameraRayCaster" type="Node3D" parent="." unique_id=1228103027 node_paths=PackedStringArray("camera", "bottle_highlight")]
-script = ExtResource("14_kdgia")
-camera = NodePath("../StaticPlayer/Head/Eyes/Camera3D")
-bottle_highlight = NodePath("../Bottle/Highlight")
-
-[node name="BottlePosition" type="Node3D" parent="." unique_id=1970099946]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.326817, 1.0113187, -9.283389)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="BottlePosition" unique_id=1197295119]
-mesh = SubResource("PrismMesh_0durp")
-
-[node name="Glass" type="StaticBody3D" parent="." unique_id=853112131 groups=["CurrentlySelectedGlass"]]
+[node name="Glass" type="StaticBody3D" parent="." unique_id=853112131 node_paths=PackedStringArray("liquid") groups=["CurrentlySelectedGlass"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.326817, 1.0113187, -8.55236)
 script = ExtResource("17_8qslo")
+liquid = NodePath("Liquid")
 
-[node name="Glass" type="CSGCylinder3D" parent="Glass" unique_id=1650062821]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15479112, 0)
-radius = 0.08
-height = 0.3
-material = SubResource("StandardMaterial3D_0durp")
+[node name="Liquid" type="MeshInstance3D" parent="Glass" unique_id=1775449346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18041015, 0)
+mesh = SubResource("CylinderMesh_01iop")
+surface_material_override/0 = SubResource("ShaderMaterial_r72wd")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Glass/Glass" unique_id=1915469847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034747124, 0)
-operation = 2
-radius = 0.06
-height = 0.25
+[node name="SimpleGlass" parent="Glass" unique_id=883487239 instance=ExtResource("17_r72wd")]
+transform = Transform3D(0.3, 0, 0, 0, 0.4, 0, 0, 0, 0.3, 0, 0.15745807, 0)
+
+[node name="UpdateLiquid" type="Timer" parent="Glass" unique_id=1193085283]
+wait_time = 0.05
 
 [node name="GlassPosition" type="Node3D" parent="." unique_id=282772031]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.326817, 1.0113187, -8.55236)
@@ -512,7 +492,96 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.326817, 1.0113187, -8.55236
 [node name="MeshInstance3D" type="MeshInstance3D" parent="GlassPosition" unique_id=695662814]
 mesh = SubResource("PrismMesh_0durp")
 
+[node name="BottlesOnBar" type="Node3D" parent="." unique_id=1495723929 node_paths=PackedStringArray("slots", "other_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2993371, 1.0128278, -9.314684)
+script = ExtResource("18_01iop")
+slots = [NodePath("Pos1"), NodePath("Pos2"), NodePath("Pos3")]
+other_area = NodePath("../StoredBottles")
+
+[node name="Pos1" type="Marker3D" parent="BottlesOnBar" unique_id=1943515440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.116996765, 0, -0.25483036)
+script = ExtResource("19_01iop")
+
+[node name="Pos2" type="Marker3D" parent="BottlesOnBar" unique_id=1317636501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14474487, 0, 0.14858341)
+script = ExtResource("19_01iop")
+
+[node name="Pos3" type="Marker3D" parent="BottlesOnBar" unique_id=682244326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20485902, 0, -0.1877346)
+script = ExtResource("19_01iop")
+
+[node name="StoredBottles" type="Node3D" parent="." unique_id=1123656635 node_paths=PackedStringArray("slots", "other_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.163121, 1.0128278, -8.863799)
+script = ExtResource("18_01iop")
+slots = [NodePath("Position1"), NodePath("Position2")]
+other_area = NodePath("../BottlesOnBar")
+
+[node name="Position1" type="Marker3D" parent="StoredBottles" unique_id=1358343364]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35673904)
+script = ExtResource("19_01iop")
+
+[node name="Whiskey" type="RigidBody3D" parent="StoredBottles/Position1" unique_id=1225453745 node_paths=PackedStringArray("player") groups=["Bottles"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18919301, 0)
+collision_layer = 3
+collision_mask = 3
+gravity_scale = 0.0
+script = ExtResource("14_0durp")
+player = NodePath("../../../StaticPlayer")
+drink_name = "Whiskey"
+pour_speed = 10.0
+drink_colour = Color(0.29890722, 0.10320575, 0.00054789643, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoredBottles/Position1/Whiskey" unique_id=1139347409]
+shape = SubResource("CylinderShape3D_vshon")
+metadata/_edit_lock_ = true
+
+[node name="Bottle" type="MeshInstance3D" parent="StoredBottles/Position1/Whiskey" unique_id=641742705]
+mesh = SubResource("CylinderMesh_vshon")
+metadata/_edit_lock_ = true
+
+[node name="Highlight" type="MeshInstance3D" parent="StoredBottles/Position1/Whiskey" unique_id=733810419]
+visible = false
+mesh = SubResource("CylinderMesh_vshon")
+surface_material_override/0 = SubResource("ShaderMaterial_kdgia")
+metadata/_edit_lock_ = true
+
+[node name="Position2" type="Marker3D" parent="StoredBottles" unique_id=1343460213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.041064262, 0, 0.11874676)
+script = ExtResource("19_01iop")
+
+[node name="Lemonade" type="RigidBody3D" parent="StoredBottles/Position2" unique_id=467619050 node_paths=PackedStringArray("player") groups=["Bottles"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.107785225, 0)
+collision_layer = 3
+collision_mask = 3
+gravity_scale = 0.0
+script = ExtResource("14_0durp")
+player = NodePath("../../../StaticPlayer")
+drink_name = "Lemonade"
+drink_colour = Color(0.78, 0.77519, 0.49139997, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StoredBottles/Position2/Lemonade" unique_id=367850366]
+shape = SubResource("CylinderShape3D_8qslo")
+metadata/_edit_lock_ = true
+
+[node name="Bottle" type="MeshInstance3D" parent="StoredBottles/Position2/Lemonade" unique_id=1677149942]
+mesh = SubResource("CylinderMesh_8qslo")
+surface_material_override/0 = SubResource("StandardMaterial3D_7sxce")
+metadata/_edit_lock_ = true
+
+[node name="Highlight" type="MeshInstance3D" parent="StoredBottles/Position2/Lemonade" unique_id=422066658]
+visible = false
+mesh = SubResource("CylinderMesh_8qslo")
+surface_material_override/0 = SubResource("ShaderMaterial_kdgia")
+metadata/_edit_lock_ = true
+
+[node name="InteractionComponent" type="Node3D" parent="StoredBottles/Position2/Lemonade" unique_id=523405621]
+script = ExtResource("22_l35oh")
+
+[node name="PickupComponent" type="Node" parent="StoredBottles/Position2/Lemonade/InteractionComponent" unique_id=191632405]
+script = ExtResource("22_2swed")
+
 [connection signal="mouse_entered" from="StaticPlayer/CanvasLayer/SwitchCameraUI/Left" to="StaticPlayer/CanvasLayer/SwitchCameraUI" method="_on_left_mouse_entered"]
 [connection signal="mouse_entered" from="StaticPlayer/CanvasLayer/SwitchCameraUI/Right" to="StaticPlayer/CanvasLayer/SwitchCameraUI" method="_on_right_mouse_entered"]
 [connection signal="mouse_entered" from="StaticPlayer/CanvasLayer/SwitchCameraUI/Down" to="StaticPlayer/CanvasLayer/SwitchCameraUI" method="_on_down_mouse_entered"]
 [connection signal="mouse_entered" from="StaticPlayer/CanvasLayer/SwitchCameraUI/Up" to="StaticPlayer/CanvasLayer/SwitchCameraUI" method="_on_up_mouse_entered"]
+[connection signal="timeout" from="Glass/UpdateLiquid" to="Glass" method="set_colour_and_fill"]
