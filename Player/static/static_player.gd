@@ -57,8 +57,14 @@ func _physics_process(delta: float) -> void:
 			current_highlighted_bottle.stop_pour()
 
 
+@export var debug_object : Node3D
 
 func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("primary"):
+		var new_position = ray_cast.raycast_point_fixed_on_x_axis(3.327)
+		debug_object.global_position = new_position
+		print(ray_cast.raycast_point_fixed_on_x_axis(3.327))
+		
 	#pour drink
 	if event.is_action_pressed("primary") and can_pour:
 		if current_highlighted_bottle:

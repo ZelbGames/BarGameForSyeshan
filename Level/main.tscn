@@ -341,10 +341,11 @@ max_db = 6.0
 autoplay = true
 parameters/looping = true
 
-[node name="StaticPlayer" type="CharacterBody3D" parent="." unique_id=1889640499 node_paths=PackedStringArray("ray_cast") groups=["Player"]]
+[node name="StaticPlayer" type="CharacterBody3D" parent="." unique_id=1889640499 node_paths=PackedStringArray("ray_cast", "debug_object") groups=["Player"]]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.610323, 0, -8.569157)
 script = ExtResource("3_eo7o3")
 ray_cast = NodePath("CameraRayCaster")
+debug_object = NodePath("../Glass")
 
 [node name="StandingCollision" type="CollisionShape3D" parent="StaticPlayer" unique_id=49704309]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
